@@ -15,6 +15,7 @@ A responsive React-based web application that fetches and displays real-time dat
 * 📦 Deployed to GitHub Pages using `gh-pages`
 
 **Tech Stack:** React, Vite, JavaScript, HTML, CSS, GitHub Pages
+
 **Live Demo:** https://shafikulnayem10.github.io/Country_React_App
 
 
