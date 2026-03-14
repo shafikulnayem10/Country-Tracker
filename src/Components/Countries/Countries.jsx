@@ -23,14 +23,17 @@ const Countries = () => {
     fetchCountries();
   }, []);
 
-  const handleVisitedCountries = (country) => {
-    const isVisited = visitedCountries.some(c => c.name === country.name);
+const handleVisitedCountries = (country) => {
+  setVisitedCountries(prevVisited => {
+    const isVisited = prevVisited.some(c => c.name === country.name);
+
     if (isVisited) {
-      setVisitedCountries(visitedCountries.filter(c => c.name !== country.name));
+      return prevVisited.filter(c => c.name !== country.name);
     } else {
-      setVisitedCountries([...visitedCountries, country]);
+      return [...prevVisited, country];
     }
-  };
+  });
+};
 
   const filteredCountries = countries.filter(country =>
     (country.name?.toLowerCase() || '').includes(searchText.toLowerCase()) ||
