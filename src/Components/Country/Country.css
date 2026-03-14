@@ -1,8 +1,151 @@
-.country{
-    border: 2px,solid,white;
-    margin: 15px;
-    border-radius: 3px;
+.country {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: scale-in 0.35s ease both;
+  position: relative;
+  cursor: pointer;
 }
-.visited{
-    background: blue;
+
+.country:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+  background: var(--card-hover);
+}
+
+.country.visited {
+  background: rgba(74,222,128,0.05);
+  border-color: rgba(74,222,128,0.2);
+}
+
+.country.visited:hover {
+  border-color: rgba(74,222,128,0.35);
+  box-shadow: 0 16px 48px rgba(74,222,128,0.08), 0 0 0 1px rgba(74,222,128,0.1);
+}
+
+.visited-ribbon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(74,222,128,0.15);
+  border: 1px solid rgba(74,222,128,0.3);
+  border-radius: 100px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4ade80;
+  z-index: 2;
+  animation: scale-in 0.2s ease;
+}
+
+.flag-container {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  position: relative;
+}
+
+.flag-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, var(--card));
+  transition: background 0.3s ease;
+}
+
+.country.visited .flag-container::after {
+  background: linear-gradient(transparent, rgba(13,24,13,0.9));
+}
+
+.flag-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.country:hover .flag-img {
+  transform: scale(1.04);
+}
+
+.flag-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  opacity: 0.3;
+}
+
+.country-info {
+  padding: 18px 20px 20px;
+}
+
+.country-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.country-capital {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+
+.capital-icon {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.country-btn {
+  width: 100%;
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: var(--muted);
+}
+
+.country-btn:hover {
+  border-color: rgba(232,201,109,0.4);
+  color: var(--accent);
+  background: rgba(232,201,109,0.05);
+}
+
+.country-btn.unmark {
+  border-color: rgba(74,222,128,0.25);
+  color: #4ade80;
+  background: rgba(74,222,128,0.06);
+}
+
+.country-btn.unmark:hover {
+  border-color: rgba(74,222,128,0.5);
+  background: rgba(74,222,128,0.1);
+  box-shadow: 0 0 16px rgba(74,222,128,0.1);
 }
