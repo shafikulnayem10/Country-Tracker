@@ -5,7 +5,6 @@ import './Countries.css';
 const Countries = () => {
   const [countries, setCountries] = useState([]);
   const [visitedCountries, setVisitedCountries] = useState([]);
-  const [searchText, setSearchText] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,25 +22,20 @@ const Countries = () => {
     fetchCountries();
   }, []);
 
-const handleVisitedCountries = (country) => {
-  setVisitedCountries(prev => {
-    const exists = prev.some(c => c.name === country.name);
-
-    if (exists) {
-      return prev.filter(c => c.name !== country.name);
-    } else {
-      return [...prev, country];
-    }
-  });
-};
-
-  const filteredCountries = countries.filter(country =>
-    (country.name?.toLowerCase() || '').includes(searchText.toLowerCase()) ||
-    (country.capital?.toLowerCase() || '').includes(searchText.toLowerCase())
-  );
+  const handleVisitedCountries = (country) => {
+    setVisitedCountries(prev => {
+      const exists = prev.some(c => c.name === country.name);
+      if (exists) {
+        return prev.filter(c => c.name !== country.name);
+      } else {
+        return [...prev, country];
+      }
+    });
+  };
 
   return (
     <div className="countries-wrapper">
+
       {/* HERO */}
       <div className="hero">
         <p className="hero-eyebrow">World Explorer</p>
@@ -56,7 +50,9 @@ const handleVisitedCountries = (country) => {
           <span className="stat-label">Countries</span>
         </div>
         <div className="stat-pill">
-          <span className="stat-value" style={{ color: '#4ade80' }}>{visitedCountries.length}</span>
+          <span className="stat-value" style={{ color: '#4ade80' }}>
+            {visitedCountries.length}
+          </span>
           <span className="stat-label">Visited</span>
         </div>
         {countries.length > 0 && (
@@ -89,52 +85,37 @@ const handleVisitedCountries = (country) => {
         )}
       </div>
 
-      {/* SEARCH */}
-      <div className="search-container">
-        <div className="search-inner">
-          <span className="search-icon">⌕</span>
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search by country or capital…"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          {searchText && (
-            <span className="search-result-count">{filteredCountries.length} results</span>
-          )}
-        </div>
-      </div>
-
       {/* MAIN COUNTRIES GRID */}
       <div className="countries-grid-wrapper">
         {loading ? (
+
+          // STATE 1 — Loading
           <div className="loading-container">
             <div className="loader" />
             <p className="loading-text">Loading countries</p>
           </div>
+
         ) : (
+
+          // STATE 2 — Country cards
           <div className="countries">
-            {filteredCountries.length === 0 ? (
-              <div className="no-results">
-                <div className="no-results-icon"><i class="fa-solid fa-search"></i></div>
-                <h3>Nothing found</h3>
-                <p>Try a different search term</p>
+            {countries.map((country, i) => (
+              <div
+                key={country.name}
+                style={{ animationDelay: `${Math.min(i * 0.03, 0.6)}s` }}
+              >
+                <Country
+                  country={country}
+                  handleVisitedCountries={handleVisitedCountries}
+                  isVisited={visitedCountries.some(c => c.name === country.name)}
+                />
               </div>
-            ) : (
-              filteredCountries.map((country, i) => (
-                <div key={country.name} style={{ animationDelay: `${Math.min(i * 0.03, 0.6)}s` }}>
-                  <Country
-                    country={country}
-                    handleVisitedCountries={handleVisitedCountries}
-                    isVisited={visitedCountries.some(c => c.name === country.name)}
-                  />
-                </div>
-              ))
-            )}
+            ))}
           </div>
+
         )}
       </div>
+
     </div>
   );
 };
