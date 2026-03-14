@@ -32,7 +32,7 @@ const Country = ({ country, handleVisitedCountries, isVisited }) => {
           className={`country-btn ${isVisited ? 'unmark' : ''}`}
           onClick={() => handleVisitedCountries(country)}
         >
-          {isVisited ? ' Visited ' : 'Mark as Visited'}
+          {isVisited ? ' Mark as Not Visited' : 'Mark as Visited'}
         </button>
       </div>
     </div>

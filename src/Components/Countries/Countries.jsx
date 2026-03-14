@@ -24,15 +24,14 @@ const Countries = () => {
   }, []);
 
 const handleVisitedCountries = (country) => {
-  setVisitedCountries(prevVisited => {
-    const isVisited = prevVisited.some(c => c.name === country.name);
+  const exists = visitedCountries.some(c => c.name === country.name);
 
-    if (isVisited) {
-      return prevVisited.filter(c => c.name !== country.name);
-    } else {
-      return [...prevVisited, country];
-    }
-  });
+  if (!exists) {
+    setVisitedCountries([...visitedCountries, country]);
+  } else {
+    const updatedVisited = visitedCountries.filter(c => c.name !== country.name);
+    setVisitedCountries(updatedVisited);
+  }
 };
 
   const filteredCountries = countries.filter(country =>
