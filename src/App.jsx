@@ -1,15 +1,10 @@
-import './App.css'
 import Countries from './Components/Countries/Countries'
 
 function App() {
-  
-
   return (
-    <>
-      <div>
-        <Countries></Countries>
-      </div>
-    </>
+    <div className="min-h-screen bg-[#080810]">
+      <Countries />
+    </div>
   )
 }
 
