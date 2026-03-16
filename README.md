@@ -30,7 +30,7 @@ A beautifully designed React app that lets you explore every country in the worl
 |---|---|
 | React 18 | UI framework |
 | Vite | Build tool & dev server |
-| CSS3 | Styling & animations |
+| Tailwind CSS | Styling  |
 | Google Fonts | Typography (Playfair Display + DM Sans) |
 | Font Awesome | Icons |
 | sampleapis.com | Countries data API |
