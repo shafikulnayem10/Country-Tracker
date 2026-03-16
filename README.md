@@ -114,5 +114,5 @@ Returns country data including name, capital, and flag image.
 ---
 
 ⭐ If you found this project helpful, please give it a star!
-````
+
 
